@@ -3,15 +3,44 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/mainActivity">
+    app:startDestination="@id/world_navigation">
 
-    <fragment
-        android:id="@+id/coronaStatsFragment"
-        android:name="com.example.coronavirus.ui.CoronaStatsFragment"
-        android:label="CoronaStatsFragment" />
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.example.coronavirus.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
+    <navigation
+        android:id="@+id/world_navigation"
+        app:startDestination="@id/worldDetailFragment">
+
+        <fragment
+            android:id="@+id/worldDetailFragment"
+            android:name="com.example.coronavirus.ui.world.WorldDetailFragment"
+            android:label="WorldDetailFragment" />
+
+    </navigation>
+
+    <navigation
+        android:id="@+id/country_navigation"
+        app:startDestination="@id/coronaStatsFragment">
+        <fragment
+            android:id="@+id/coronaStatsFragment"
+            android:name="com.example.coronavirus.ui.country.CoronaStatsFragment"
+            android:label="CoronaStatsFragment" />
+
+    </navigation>
+
+
+    <navigation
+        android:id="@+id/about_navigation"
+        app:startDestination="@id/coronaAboutFragment">
+        <fragment
+            android:id="@+id/coronaAboutFragment"
+            android:name="com.example.coronavirus.ui.about.AboutFragment"
+            android:label="AboutFragment" />
+
+    </navigation>
+
+
+<!--    <activity-->
+<!--        android:id="@+id/mainActivity"-->
+<!--        android:name="com.example.coronavirus.MainActivity"-->
+<!--        android:label="activity_main"-->
+<!--        tools:layout="@layout/activity_main" />-->
 </navigation>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tb_height">90dp</dimen>
+    <dimen name="tb_elevation">4dp</dimen>
+    <dimen name="bn_height">54dp</dimen>
+</resources>

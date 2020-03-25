@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@id/world_navigation"
+        android:icon="@drawable/ic_country_flag"
+        android:title="@string/world_uc" />
+    <item
+        android:id="@id/country_navigation"
+        android:icon="@drawable/ic_country_flag"
+        android:title="@string/country_uc" />
+    <item
+        android:id="@id/about_navigation"
+        android:icon="@drawable/ic_country_flag"
+        android:title="@string/about_uc" />
+</menu>

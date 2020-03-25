@@ -1,3 +1,32 @@
 <resources>
-    <string name="app_name">Corona Virus</string>
+    <string name="app_name">Corona Virus Updates</string>
+
+    <!--Bottom Navigation Bar-->
+    <string name="country_uc">Country</string>
+    <string name="world_uc">World</string>
+    <string name="about_uc">About</string>
+
+    <string name="total_deaths">Total Deaths</string>
+    <string name="total_cases">Total Cases</string>
+    <string name="total_recovered">Total Recovered</string>
+    <string name="refresh_screen">Last Updated on %s \nSwipe Refresh for new available data</string>
+    <string name="sort_by_cases">Cases</string>
+    <string name="sort_by_today_cases">Today Cases</string>
+    <string name="sort_by_deaths">Deaths</string>
+    <string name="sort_by_recovered">Recovered</string>
+
+    <string name="about_covid">Coronavirus disease (COVID-19) is an infectious disease caused by a new virus.
+The disease causes respiratory illness (like the flu) with symptoms such as a cough, fever,
+        and in more severe cases, difficulty breathing. You can protect yourself by washing your hands
+        frequently, avoiding touching your face, and avoiding close contact (1 meter or 3 feet) with
+        people who are unwell.</string>
+
+
+    <string name="how_it_spreads">Coronavirus disease spreads primarily through contact with an
+        infected person when they cough or sneeze. It also spreads when a person touches a surface or
+        object that has the virus on it, then touches their eyes, nose, or mouth.</string>
+
+    <string name="data_from">Data from https://github.com/novelcovid/</string>
+
+
 </resources>

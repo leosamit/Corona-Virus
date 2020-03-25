@@ -9,12 +9,16 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
+    dataBinding {
+        enabled = true
+    }
     defaultConfig {
-        applicationId "com.example.coronavirus"
+        applicationId "com.samit.coronavirus"
         minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField 'String', 'API_DEVELOPER_TOKEN', "\"${api_developer_token}\""
 
@@ -28,6 +32,7 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
@@ -54,6 +59,20 @@ dependencies {
     implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
     implementation "com.facebook.stetho:stetho:$rootProject.stetho"
     implementation "com.facebook.stetho:stetho-okhttp3:$rootProject.stetho"
+
+    //Rx
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.rxKotlinVersion"
+    implementation "com.jakewharton.rxbinding3:rxbinding:$rootProject.rx3bindingsVersion"
+
+    //Rx Permission
+    implementation "com.tbruyelle.rxpermissions2:rxpermissions:$rxPermissionVersion"
+
+    //Anko
+    implementation "org.jetbrains.anko:anko-commons:$rootProject.ankoVersion"
+
+    //Multidex
+    implementation 'androidx.multidex:multidex:2.0.1'
 
     // Dagger
     kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"

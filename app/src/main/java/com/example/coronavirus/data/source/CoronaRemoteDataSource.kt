@@ -8,6 +8,15 @@ import javax.inject.Inject
 class CoronaRemoteDataSource @Inject constructor(private val service: CoronaService) :
     BaseDataSource() {
 
-    suspend fun fetchCoronaSets() =
-        getResult { service.getAllCoronaList() }
+    suspend fun fetchCoronaCountrySets() =
+        getResult { service.getCountriesCoronaList() }
+
+    suspend fun fetchCoronaCountryListSoretd(sortBy: String) =
+        getResult { service.getCountriesCoronaListSorted(sortBy) }
+
+    suspend fun fetchCoronaAllDetails() =
+        getResult { service.getAllCoronaDetails() }
+
+    suspend fun fetchCoronaByCountry(country: String) =
+        getResult { service.getCountryCorona(country) }
 }

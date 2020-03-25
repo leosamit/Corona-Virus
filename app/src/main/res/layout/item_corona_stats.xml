@@ -7,7 +7,7 @@
 
         <variable
             name="coronaStats"
-            type="com.example.coronavirus.data.CoronaStats" />
+            type="com.example.coronavirus.data.CoronaCountryStats" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,10 +20,143 @@
             android:id="@+id/tv_country"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="8dp"
             android:text="@{coronaStats.country}"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_confirmed"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_flag"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Country" />
+
+
+        <TextView
+            android:id="@+id/tv_confirmed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:ellipsize="end"
+            android:text="@{`Total Cases: ` +coronaStats.cases.toString()}"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_death"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_flag"
+            app:layout_constraintTop_toBottomOf="@id/tv_country"
+            tools:text="Total Confirmed" />
+
+        <TextView
+            android:id="@+id/tv_today_cases"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:ellipsize="end"
+            android:textColor="@color/black"
+            android:text="@{`Today Cases: ` +coronaStats.todayCases.toString()}"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_death"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@id/tv_country"
+            tools:text="Total Confirmed" />
+
+        <TextView
+            android:id="@+id/tv_death"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:ellipsize="end"
+            android:text="@{`Total Deaths: ` +coronaStats.deaths.toString()}"
+            android:textColor="@color/red_death_color"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_active_cases"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_flag"
+            app:layout_constraintTop_toBottomOf="@id/tv_confirmed"
+            tools:text="Total Deaths" />
+
+        <TextView
+            android:id="@+id/tv_today_deaths"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:ellipsize="end"
+            android:text="@{`Today Deaths: ` +coronaStats.todayDeaths.toString()}"
+            android:textColor="@color/red_death_color"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_active_cases"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_today_cases"
+            tools:text="Today Deaths" />
+
+
+        <TextView
+            android:id="@+id/tv_active_cases"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/black"
+            android:text="@{`Active: ` +coronaStats.active.toString()}"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_recovered"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_flag"
+            app:layout_constraintTop_toBottomOf="@id/tv_death"
+            tools:text="Active Cases" />
+
+        <TextView
+            android:id="@+id/tv_critical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:ellipsize="end"
+            android:text="@{`Critical: ` +coronaStats.critical.toString()}"
+            android:textColor="@color/red_death_color"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/tv_active_cases"
+            app:layout_constraintTop_toBottomOf="@id/tv_death"
+            tools:text="Critical" />
+
+        <TextView
+            android:id="@+id/tv_recovered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{`Total Recovered: ` +coronaStats.recovered.toString()}"
+            android:textColor="@color/color_green"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/view"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_flag"
+            app:layout_constraintTop_toBottomOf="@id/tv_active_cases"
+            tools:text="Total Recovered" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="17dp"
+            android:background="@color/pale_grey"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_recovered" />
+
+        <ImageView
+            android:id="@+id/iv_flag"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:flagImage="@{coronaStats.countryInfo.flag}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@color/black" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

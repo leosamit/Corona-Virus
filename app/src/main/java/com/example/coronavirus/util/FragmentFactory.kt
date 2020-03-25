@@ -1,6 +1,6 @@
 package com.example.coronavirus.util
 
-import com.example.coronavirus.ui.CoronaStatsFragment
+import com.example.coronavirus.ui.country.CoronaStatsFragment
 
 object FragmentFactory {
 

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.example.coronavirus.data.CoronaCountryStats" />
+
+        <import type="java.util.List" />
+
+
+        <variable
+            name="coronaStats"
+            type="CoronaCountryStats" />
+
+        <variable
+            name="isLoading"
+            type="Boolean" />
+
+        <variable
+            name="lastUpdated"
+            type="String" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/srl_corona_full_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:refreshing="@{isLoading}">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="30dp">
+
+
+                    <!--                    <include-->
+                    <!--                        android:id="@+id/container_total_cases"-->
+                    <!--                        layout="@layout/item_each_detail"-->
+                    <!--                        app:layout_constraintBottom_toTopOf="@+id/tv_test"-->
+                    <!--                        app:layout_constraintLeft_toLeftOf="parent"-->
+                    <!--                        app:layout_constraintRight_toRightOf="parent"-->
+                    <!--                        app:layout_constraintTop_toTopOf="parent"-->
+                    <!--                        app:layout_constraintVertical_chainStyle="spread"-->
+                    <!--                        app:parameterText="@{@string/total_cases}"-->
+                    <!--                        app:parameterValue="@{coronaStats.cases.toString()}" />-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:text="@{@string/refresh_screen(lastUpdated)}"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toTopOf="@+id/container_total_cases"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Refresh page" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/container_total_cases"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        app:cardBackgroundColor="@color/cardview_background"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="5dp"
+                        app:cardUseCompatPadding="true"
+                        app:layout_constraintBottom_toTopOf="@+id/container_total_deaths"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp">
+
+
+                            <TextView
+                                android:id="@+id/tv_cases"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{@string/total_cases}"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                app:layout_constraintBottom_toTopOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toLeftOf="@id/tv_cases_count"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="Total Cases" />
+
+                            <TextView
+                                android:id="@+id/tv_cases_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{coronaStats.cases.toString()}"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                app:layout_constraintBottom_toTopOf="parent"
+                                app:layout_constraintLeft_toRightOf="@+id/tv_cases"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="10" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/container_total_deaths"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:padding="10dp"
+                        app:cardBackgroundColor="@color/cardview_background"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="5dp"
+                        app:cardUseCompatPadding="true"
+                        app:layout_constraintBottom_toTopOf="@+id/container_total_recovered"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/container_total_cases">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp">
+
+
+                            <TextView
+                                android:id="@+id/tv_death"
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{@string/total_deaths}"
+                                android:textColor="@color/red_death_color"
+                                android:textSize="18sp"
+                                app:layout_constraintBottom_toTopOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toLeftOf="@id/tv_death_count"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="Total Deaths" />
+
+                            <TextView
+                                android:id="@+id/tv_death_count"
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{coronaStats.deaths.toString()}"
+                                android:textColor="@color/red_death_color"
+                                android:textSize="18sp"
+                                app:layout_constraintBottom_toTopOf="parent"
+                                app:layout_constraintLeft_toRightOf="@+id/tv_death"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="10" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/container_total_recovered"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:padding="10dp"
+                        app:cardBackgroundColor="@color/cardview_background"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="5dp"
+                        app:cardUseCompatPadding="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/container_total_deaths">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp">
+
+
+                            <TextView
+                                android:id="@+id/tv_recovered"
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{@string/total_recovered}"
+                                android:textColor="@color/color_green"
+                                android:textSize="18sp"
+                                app:layout_constraintBottom_toTopOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toLeftOf="@id/tv_recovered_count"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="Total Recovered" />
+
+                            <TextView
+                                android:id="@+id/tv_recovered_count"
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{coronaStats.recovered.toString()}"
+                                android:textColor="@color/color_green"
+                                android:textSize="18sp"
+                                app:layout_constraintBottom_toTopOf="parent"
+                                app:layout_constraintLeft_toRightOf="@+id/tv_recovered"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="10" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.core.widget.NestedScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</layout>

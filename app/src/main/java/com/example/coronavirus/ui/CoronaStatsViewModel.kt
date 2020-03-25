@@ -4,11 +4,26 @@ import androidx.lifecycle.ViewModel
 import com.example.coronavirus.data.repository.CoronaRepository
 import javax.inject.Inject
 
-class CoronaStatsViewModel @Inject constructor(repository: CoronaRepository) : ViewModel() {
+class CoronaStatsViewModel @Inject constructor(private val repository: CoronaRepository) :
+    ViewModel() {
 
-    init {
-        repository.getCoronaSets()
+
+    fun getCountryCoronaList(sortBy: String) {
+        //repository.getCountryCoronaList()
+        repository.getCountryCoronaListSoretd(sortBy)
     }
 
-    val coronaStats = repository.coronaStats
+    fun getAllCoronaDetails() {
+        repository.getAllCoronaDetails()
+    }
+
+    fun getCoronaByCountry(country: String) {
+        repository.getCoronaByCountry(country)
+    }
+
+
+    val coronaCountryList = repository.coronaCountryStats
+    val allCoronaDetails = repository.allCoronaDetails
+    val coronaByCountry = repository.coronaByCountry
+
 }

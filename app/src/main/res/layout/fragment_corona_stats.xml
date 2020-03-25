@@ -1,17 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fragment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <import type="com.example.coronavirus.data.CoronaCountryStats" />
+
+        <import type="android.view.View" />
+
+        <import type="java.util.List" />
+
+        <variable
+            name="coronaList"
+            type="List&lt;CoronaCountryStats>" />
+
+        <variable
+            name="countryList"
+            type="List&lt;String>" />
+
+        <variable
+            name="isLoading"
+            type="Boolean" />
+
+        <variable
+            name="showStatsList"
+            type="Boolean" />
+
+        <variable
+            name="showCountryList"
+            type="Boolean" />
+
+        <variable
+            name="showIndividualCountry"
+            type="Boolean" />
+
+        <variable
+            name="showRadioGroup"
+            type="Boolean" />
+
+        <variable
+            name="coronaCountryStat"
+            type="CoronaCountryStats" />
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_corona_full_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:refreshing="@{isLoading}">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@color/search_grey"
+                    android:drawablePadding="18dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="Search"
+                    android:padding="10dp"
+                    android:textColorHint="@color/black"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:scrollbars="vertical"
+                    android:visibility="@{showStatsList ? View.VISIBLE : View.GONE,default=visible}"
+                    app:coronaStatsList="@{coronaList}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rg_sort"
+                    tools:listitem="@layout/item_corona_stats"
+                    tools:visibility="visible" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_Country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:clipToPadding="false"
+                    android:scrollbars="vertical"
+                    android:visibility="@{showCountryList ? View.VISIBLE : View.GONE,default=gone}"
+                    app:countryList="@{countryList}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rg_sort"
+                    tools:listitem="@layout/item_country"
+                    tools:visibility="gone" />
+
+                <include
+                    android:id="@+id/individual_country_container"
+                    layout="@layout/item_corona_stats"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:visibility="@{showIndividualCountry ? View.VISIBLE : View.GONE,default=gone}"
+                    app:coronaStats="@{coronaCountryStat}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rg_sort"
+                    tools:visibility="gone" />
+
+
+                <RadioGroup
+                    android:id="@+id/rg_sort"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="@{showRadioGroup ? View.VISIBLE : View.GONE,default=visible}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/search_view"
+                    tools:visibility="visible">
+
+
+                    <RadioButton
+                        android:id="@+id/rb_cases"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/sort_by_cases" />
+
+                    <RadioButton
+                        android:id="@+id/rb_today_cases"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sort_by_today_cases" />
+
+                    <RadioButton
+                        android:id="@+id/rb_deaths"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sort_by_deaths" />
+
+
+                    <RadioButton
+                        android:id="@+id/rb_recovered"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sort_by_recovered" />
+
+                </RadioGroup>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</layout>

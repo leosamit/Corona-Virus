@@ -1,35 +1,51 @@
 package com.example.coronavirus
 
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.observe
-import com.example.coronavirus.data.Result
-import com.example.coronavirus.di.component.Injectable
-import com.example.coronavirus.ui.CoronaStatsViewModel
-import timber.log.Timber
-import com.example.coronavirus.di.injectViewModel
-import com.example.coronavirus.ui.CoronaStatsFragment
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.example.coronavirus.ui.country.CoronaStatsFragment
 import com.example.coronavirus.util.FragmentFactory
-import dagger.android.DaggerActivity
-import dagger.android.DaggerApplication
 import dagger.android.support.DaggerAppCompatActivity
-import javax.inject.Inject
+import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : DaggerAppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity(), NavController.OnDestinationChangedListener {
+
+    private lateinit var navHostFragment: NavHostFragment
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        showHomeFragment()
+       // showHomeFragment()
+        initNavigation()
 
+    }
 
+    private fun initNavigation() {
+        navHostFragment = f_nav_host_main as NavHostFragment
+        navHostFragment.navController.addOnDestinationChangedListener(this)
+        //setupActionBarWithNavController(navHostFragment.navController)
+        bn_main.setupWithNavController(navHostFragment.navController)
+        bn_main.setOnNavigationItemReselectedListener { }
+    }
+
+    override fun onDestinationChanged(
+        controller: NavController,
+        destination: NavDestination,
+        arguments: Bundle?
+    ) {
+    }
+
+    fun initToolbar() {
+        setSupportActionBar(tb_main)
+        supportActionBar?.apply {
+            //title = ""
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+            setHomeButtonEnabled(true)
+        }
     }
 
     private fun showHomeFragment() {

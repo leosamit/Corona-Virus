@@ -32,6 +32,15 @@ buildscript {
         timberVersion = '4.7.1'
         daggerVersion = '2.23.2'
 
+        //Anko
+        ankoVersion = "0.10.8"
+
+        //Rx
+        rx3bindingsVersion = "3.0.0-alpha2"
+        rxAndroidVersion = "2.1.1"
+        rxKotlinVersion = "2.0.0"
+        rxPermissionVersion = "0.9.5@aar"
+
         // Testing dependencies
         junitVersion = '4.12'
         espressoVersion = '3.1.1'
