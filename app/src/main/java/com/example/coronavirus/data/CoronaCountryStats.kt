@@ -2,7 +2,6 @@ package com.example.coronavirus.data
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.example.coronavirus.util.DateConverter
 import com.example.coronavirus.util.convertDate
 import com.google.gson.annotations.SerializedName
 
@@ -10,7 +9,7 @@ data class CoronaCountryStats @RequiresApi(Build.VERSION_CODES.N) constructor(
     @SerializedName("country")
     val country: String?,
     @SerializedName("cases")
-    val cases: Int?,
+    val cases: Long?,
     @SerializedName("todayCases")
     val todayCases: Int?,
     @SerializedName("todayDeaths")
@@ -24,7 +23,7 @@ data class CoronaCountryStats @RequiresApi(Build.VERSION_CODES.N) constructor(
     @SerializedName("critical")
     val critical: Int?,
     @SerializedName("casesPerOneMillion")
-    val casesPerOneMillion: Int,
+    val casesPerOneMillion: Float,
     @SerializedName("updated")
     val updated: Long,
     @SerializedName("countryInfo")
