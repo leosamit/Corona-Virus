@@ -36,10 +36,6 @@ class CoronaStatsFragment : DaggerFragment() {
     var sortedByApi: String = ""
 
 
-//    private val viewModel: CoronaStatsViewModel by lazy {
-//        ViewModelProviders.of(this, viewModelFactory).get(CoronaStatsViewModel::class.java)
-//    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
