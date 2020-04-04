@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.crashlytics.android.Crashlytics
 import com.example.coronavirus.R
 import com.example.coronavirus.data.Result
 import com.example.coronavirus.databinding.FragmentWorldDetailBinding
@@ -17,9 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_corona_stats.*
 import timber.log.Timber
-import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 
 class WorldDetailFragment : DaggerFragment() {
@@ -45,6 +44,7 @@ class WorldDetailFragment : DaggerFragment() {
     }
 
     fun initUI() {
+        //Crashlytics.getInstance().crash()
         //binding2.parameterText=binding.containerDetail.parameterText
         viewModel = injectViewModel(viewModelFactory)
 
