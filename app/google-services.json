@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "289097090722",
+    "firebase_url": "https://corona-virus-f21d4.firebaseio.com",
+    "project_id": "corona-virus-f21d4",
+    "storage_bucket": "corona-virus-f21d4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289097090722:android:60b5c9696f93a4907a39fb",
+        "android_client_info": {
+          "package_name": "com.samit.coronavirus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "289097090722-9sv5dgmsm08m3l8rc25ucvog70ev6n3m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCW66hMJIpplUwkJdcpusv5ro_jJuj3Z9A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "289097090722-9sv5dgmsm08m3l8rc25ucvog70ev6n3m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
