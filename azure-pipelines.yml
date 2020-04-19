@@ -3,6 +3,12 @@
 # Add steps that test, sign, and distribute the APK, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/android
 
+# On PRs against master
+pr:
+  branches:
+    include:
+    - master
+    
 trigger:
 - master
 
@@ -15,6 +21,8 @@ steps:
     workingDirectory: ''
     gradleWrapperFile: 'gradlew'
     gradleOptions: '-Xmx3072m'
-    publishJUnitResults: false
+    publishJUnitResults: true
     testResultsFiles: '**/TEST-*.xml'
-    tasks: 'assembleDebug'
+    tasks: 'assembleDebug test'
+  displayName: gradlew assembleDebug test
+
