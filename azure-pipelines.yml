@@ -33,7 +33,7 @@ steps:
     apksignerKeystoreFile: 'keystore.keystore'
     apksignerKeystorePassword: '$(key_store_password)'
     apksignerKeystoreAlias: '${key_alias}'
-    apksignerKeyPassword: '${key_alias_password}'
+    apksignerKeyPassword: '${key_password}'
     zipalign: true
 
 - task: CopyFiles@2
