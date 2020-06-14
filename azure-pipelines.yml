@@ -3,6 +3,12 @@
 # Add steps that test, sign, and distribute the APK, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/android
 
+# On PRs against master
+pr:
+  branches:
+    include:
+    - master
+    
 trigger:
 - master
 
@@ -15,6 +21,29 @@ steps:
     workingDirectory: ''
     gradleWrapperFile: 'gradlew'
     gradleOptions: '-Xmx3072m'
-    publishJUnitResults: false
+    publishJUnitResults: true
     testResultsFiles: '**/TEST-*.xml'
     tasks: 'assembleDebug'
+  displayName: gradlew assembleDebug
+
+- task: AndroidSigning@3
+  inputs:
+    apkFiles: '**/*.apk'
+    apksignerKeystoreFile: 'corona_key_store'
+    apksignerKeystorePassword: '$(key_store_password)'
+    apksignerKeystoreAlias: '${key_alias}'
+    apksignerKeyPassword: '${key_alias_password}'
+    apksignerArguments: '--out $(Build.SourcesDirectory)/app/build/outputs/apk/release/my-crazy-app.release.apk'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: $(Build.SourcesDirectory)
+    contents: '**/*.release.apk' 
+    targetFolder: '$(build.artifactStagingDirectory)'
+    overWrite: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)/app/build/outputs/apk/release/'
+    artifactName: 'apks' 
+    publishLocation: 'container'
