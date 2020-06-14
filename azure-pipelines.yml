@@ -31,9 +31,9 @@ steps:
     apkFiles: '**/*.apk'
     apksign: true
     apksignerKeystoreFile: 'keystore.keystore'
-    apksignerKeystorePassword: '$(key_store_password)'
-    apksignerKeystoreAlias: '${key_alias}'
-    apksignerKeyPassword: '${key_password}'
+    apksignerKeystorePassword: 'corona'
+    apksignerKeystoreAlias: 'key0'
+    apksignerKeyPassword: 'corona'
     zipalign: true
 
 - task: CopyFiles@2
