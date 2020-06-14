@@ -29,10 +29,11 @@ steps:
 - task: AndroidSigning@3
   inputs:
     apkFiles: '**/*.apk'
-    apksignerKeystoreFile: 'corona_key_store'
+    apksignerKeystoreFile: 'keystore.keystore'
     apksignerKeystorePassword: '$(key_store_password)'
     apksignerKeystoreAlias: '${key_alias}'
     apksignerKeyPassword: '${key_alias_password}'
+    zipalign: true
 
 - task: CopyFiles@2
   inputs:
