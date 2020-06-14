@@ -26,14 +26,24 @@ steps:
     tasks: 'assembleDebug'
   displayName: gradlew assembleDebug
 
+- task: AndroidSigning@3
+  inputs:
+    apkFiles: '**/*.apk'
+    apksignerKeystoreFile: 'corona_key_store'
+    apksignerKeystorePassword: '$(key_store_password)'
+    apksignerKeystoreAlias: '${key_alias}'
+    apksignerKeyPassword: '${key_alias_password}'
+    apksignerArguments: '--out $(Build.SourcesDirectory)/app/build/outputs/apk/release/my-crazy-app.release.apk'
+
 - task: CopyFiles@2
   inputs:
-    contents: '**/*.apk'
+    SourceFolder: $(Build.SourcesDirectory)
+    contents: '**/*.release.apk' 
     targetFolder: '$(build.artifactStagingDirectory)'
+    overWrite: true
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(build.artifactStagingDirectory)/app/build/outputs/'
-    artifactName: 'apk-files'
-    artifactType: 'container'
-
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)/app/build/outputs/apk/release/'
+    artifactName: 'apks' 
+    publishLocation: 'container'
